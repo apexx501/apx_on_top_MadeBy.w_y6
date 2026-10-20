@@ -15,95 +15,21 @@
             --text-gray: #8892B0;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-light); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
 
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+        .panel-box { background: var(--card-bg); border: 2px solid var(--primary-yellow); border-radius: 20px; padding: 30px; width: 100%; max-width: 480px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        h2 { text-align: center; color: var(--primary-yellow); margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 6px; font-size: 14px; color: var(--text-gray); }
+        input, select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid rgba(255, 208, 0, 0.3); background: #0A192F; color: #fff; font-size: 14px; outline: none; }
+        input:focus, select:focus { border-color: var(--primary-yellow); }
+        .btn-submit { width: 100%; padding: 14px; background: var(--primary-yellow); color: #000; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; margin-top: 15px; transition: 0.2s; }
+        .btn-submit:hover { opacity: 0.9; }
 
-        .panel-box {
-            background: var(--card-bg);
-            border: 2px solid var(--primary-yellow);
-            border-radius: 20px;
-            padding: 30px;
-            width: 100%;
-            max-width: 480px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        h2 {
-            text-align: center;
-            color: var(--primary-yellow);
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-size: 14px;
-            color: var(--text-gray);
-        }
-
-        input, select {
-            width: 100%;
-            padding: 12px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 208, 0, 0.3);
-            background: #0A192F;
-            color: #fff;
-            font-size: 14px;
-            outline: none;
-        }
-
-        input:focus, select:focus {
-            border-color: var(--primary-yellow);
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 14px;
-            background: var(--primary-yellow);
-            color: #000;
-            border: none;
-            border-radius: 10px;
-            font-weight: 800;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: 0.2s;
-        }
-
-        .btn-submit:hover {
-            opacity: 0.9;
-        }
-
-        #login-screen, #dashboard-screen {
-            display: none;
-        }
-
-        #login-screen.active, #dashboard-screen.active {
-            display: block;
-        }
-
-        .status-msg {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 14px;
-        }
+        #login-screen, #dashboard-screen { display: none; }
+        #login-screen.active, #dashboard-screen.active { display: block; }
+        .status-msg { text-align: center; margin-top: 15px; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -135,13 +61,12 @@
                 <option value="🟡 تحديث جديد قادم">🟡 تحديث جديد قادم</option>
             </select>
         </div>
-
         <div class="form-group">
             <label>رابط تحميل DELTA IOS:</label>
-            <input type="url" id="ios-link" placeholder="رابط الميديا فاير">
+            <input type="url" id="ios-link" placeholder="رابط التحميل">
         </div>
 
-        <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">
+        <hr style="border-color: rgba(255,255,255,0.1); margin: 15px 0;">
 
         <div class="form-group">
             <label>حالة DELTA ANDROID:</label>
@@ -151,24 +76,36 @@
                 <option value="🟡 تحديث جديد قادم">🟡 تحديث جديد قادم</option>
             </select>
         </div>
-
         <div class="form-group">
             <label>رابط تحميل DELTA ANDROID:</label>
-            <input type="url" id="android-link" placeholder="رابط الميديا فاير">
+            <input type="url" id="android-link" placeholder="رابط التحميل">
         </div>
 
-        <button class="btn-submit" onclick="saveData()">حفظ ونشر التحديثات للديسكورد والموقع</button>
+        <hr style="border-color: rgba(255,255,255,0.1); margin: 15px 0;">
+
+        <div class="form-group">
+            <label>حالة PC:</label>
+            <select id="pc-status">
+                <option value="🟢 يعمل بنجاح">🟢 يعمل بنجاح</option>
+                <option value="🔴 متوقف للتحسين والصيانة">🔴 متوقف للصيانة</option>
+                <option value="🟡 تحديث جديد قادم">🟡 تحديث جديد قادم</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>رابط تحميل PC:</label>
+            <input type="url" id="pc-link" placeholder="رابط التحميل">
+        </div>
+
+        <button class="btn-submit" onclick="saveData()">حفظ ونشر التحديثات فوراً للديسكورد والموقع</button>
         <div id="save-msg" class="status-msg"></div>
     </div>
 
     <script>
         const WEBHOOK_URL = "https://discord.com/api/webhooks/1562110848657530890/_ubBGkQMS2cB_ExA8qSGvRPJgegD18jR6GQj_VIW9B-PpsShkZK9Lt218yNgb6zebQHn";
 
-        // التحقق من بيانات الدخول
         function login() {
             const u = document.getElementById('username').value;
             const p = document.getElementById('password').value;
-
             if (u === "Apex18" && p === "Apex17") {
                 document.getElementById('login-screen').classList.remove('active');
                 document.getElementById('dashboard-screen').classList.add('active');
@@ -178,37 +115,41 @@
             }
         }
 
-        // تحميل البيانات المحفوظة سابقاً
         function loadSavedData() {
             document.getElementById('ios-status').value = localStorage.getItem('apex_ios_status') || '🟢 يعمل بنجاح';
-            document.getElementById('ios-link').value = localStorage.getItem('apex_ios_link') || 'https://www.mediafire.com/file/mbk0ng1zrouuirr/Delta-2.717.982.ipa.download/file';
+            document.getElementById('ios-link').value = localStorage.getItem('apex_ios_link') || '#';
             document.getElementById('android-status').value = localStorage.getItem('apex_android_status') || '🟢 يعمل بنجاح';
-            document.getElementById('android-link').value = localStorage.getItem('apex_android_link') || 'https://www.mediafire.com/file/ziwjam1gf2or86t/Delta-2.743.1136.apk/file';
+            document.getElementById('android-link').value = localStorage.getItem('apex_android_link') || '#';
+            document.getElementById('pc-status').value = localStorage.getItem('apex_pc_status') || '🟢 يعمل بنجاح';
+            document.getElementById('pc-link').value = localStorage.getItem('apex_pc_link') || '#';
         }
 
-        // حفظ البيانات وإرسال التحديث للديسكورد
         async function saveData() {
             const iosStatus = document.getElementById('ios-status').value;
             const iosLink = document.getElementById('ios-link').value;
             const androidStatus = document.getElementById('android-status').value;
             const androidLink = document.getElementById('android-link').value;
+            const pcStatus = document.getElementById('pc-status').value;
+            const pcLink = document.getElementById('pc-link').value;
 
             localStorage.setItem('apex_ios_status', iosStatus);
             localStorage.setItem('apex_ios_link', iosLink);
             localStorage.setItem('apex_android_status', androidStatus);
             localStorage.setItem('apex_android_link', androidLink);
+            localStorage.setItem('apex_pc_status', pcStatus);
+            localStorage.setItem('apex_pc_link', pcLink);
 
-            // إرسال البانل تلقائياً لروم الديسكورد عبر Webhook
             const embedData = {
                 username: "APEX STORE SYSTEM",
                 avatar_url: "https://github.com/arbtsmp/apx_on_top_MadeBy.w_y6/blob/main/APX%20logo.jpeg?raw=true",
                 embeds: [{
                     title: "⚡ تحديث حالة الإكسيكيوتير - APEX STORE",
                     description: "تم تحديث حالة السكريبتات وروابط التحميل بنجاح!",
-                    color: 16764928, // اللون الأصفر
+                    color: 16764928,
                     fields: [
                         { name: "📱 DELTA IOS", value: `**الحالة:** ${iosStatus}\n[اضغط للتحميل](${iosLink})`, inline: false },
-                        { name: "🤖 DELTA ANDROID", value: `**الحالة:** ${androidStatus}\n[اضغط للتحميل](${androidLink})`, inline: false }
+                        { name: "🤖 DELTA ANDROID", value: `**الحالة:** ${androidStatus}\n[اضغط للتحميل](${androidLink})`, inline: false },
+                        { name: "💻 PC", value: `**الحالة:** ${pcStatus}\n[اضغط للتحميل](${pcLink})`, inline: false }
                     ],
                     footer: { text: "APEX STORE • 2026" },
                     timestamp: new Date()
@@ -222,10 +163,10 @@
                     body: JSON.stringify(embedData)
                 });
                 document.getElementById('save-msg').style.color = "#00ff88";
-                document.getElementById('save-msg').innerText = "تم حفظ التحديثات وإرسال البانل للديسكورد بنجاح! 🚀";
+                document.getElementById('save-msg').innerText = "تم الحفظ وإرسال التحديث للديسكورد والموقع بنجاح! 🚀";
             } catch (err) {
                 document.getElementById('save-msg').style.color = "#ff4d4d";
-                document.getElementById('save-msg').innerText = "تم الحفظ بالموقع ولكن حدث خطأ في إرسال الديسكورد.";
+                document.getElementById('save-msg').innerText = "تم حفظ التحديثات ولكن حدث خطأ في إرسال الويب هوك.";
             }
         }
     </script>

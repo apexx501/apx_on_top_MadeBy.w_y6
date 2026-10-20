@@ -61,8 +61,8 @@
         <div class="section-card">
             <div class="card-icon"><i class="fa-brands fa-apple"></i></div>
             <div class="card-title">DELTA IOS</div>
-            <div id="ios-status-display" class="status-badge">🟢 يعمل بنجاح</div>
-            <a id="ios-btn-link" href="https://www.mediafire.com/file/mbk0ng1zrouuirr/Delta-2.717.982.ipa.download/file" target="_blank" class="btn-action">
+            <div id="ios-status-display" class="status-badge">الحالة: 🟢 يعمل بنجاح</div>
+            <a id="ios-btn-link" href="#" target="_blank" class="btn-action">
                 <i class="fa-solid fa-download"></i> اضغط للتحميل
             </a>
         </div>
@@ -71,8 +71,18 @@
         <div class="section-card">
             <div class="card-icon"><i class="fa-brands fa-android"></i></div>
             <div class="card-title">DELTA ANDROID</div>
-            <div id="android-status-display" class="status-badge">🟢 يعمل بنجاح</div>
-            <a id="android-btn-link" href="https://www.mediafire.com/file/ziwjam1gf2or86t/Delta-2.743.1136.apk/file" target="_blank" class="btn-action">
+            <div id="android-status-display" class="status-badge">الحالة: 🟢 يعمل بنجاح</div>
+            <a id="android-btn-link" href="#" target="_blank" class="btn-action">
+                <i class="fa-solid fa-download"></i> اضغط للتحميل
+            </a>
+        </div>
+
+        <!-- PC -->
+        <div class="section-card">
+            <div class="card-icon"><i class="fa-solid fa-desktop"></i></div>
+            <div class="card-title">PC</div>
+            <div id="pc-status-display" class="status-badge">الحالة: 🟢 يعمل بنجاح</div>
+            <a id="pc-btn-link" href="#" target="_blank" class="btn-action">
                 <i class="fa-solid fa-download"></i> اضغط للتحميل
             </a>
         </div>
@@ -98,20 +108,24 @@
     </footer>
 
     <script>
-        // سحب البيانات المحدثة من التخزين المشترك للموقع
-        if(localStorage.getItem('apex_ios_status')) {
-            document.getElementById('ios-status-display').innerText = "الحالة: " + localStorage.getItem('apex_ios_status');
-        }
-        if(localStorage.getItem('apex_ios_link')) {
-            document.getElementById('ios-btn-link').href = localStorage.getItem('apex_ios_link');
+        function updateUI() {
+            document.getElementById('ios-status-display').innerText = "الحالة: " + (localStorage.getItem('apex_ios_status') || '🟢 يعمل بنجاح');
+            document.getElementById('ios-btn-link').href = localStorage.getItem('apex_ios_link') || '#';
+
+            document.getElementById('android-status-display').innerText = "الحالة: " + (localStorage.getItem('apex_android_status') || '🟢 يعمل بنجاح');
+            document.getElementById('android-btn-link').href = localStorage.getItem('apex_android_link') || '#';
+
+            document.getElementById('pc-status-display').innerText = "الحالة: " + (localStorage.getItem('apex_pc_status') || '🟢 يعمل بنجاح');
+            document.getElementById('pc-btn-link').href = localStorage.getItem('apex_pc_link') || '#';
         }
 
-        if(localStorage.getItem('apex_android_status')) {
-            document.getElementById('android-status-display').innerText = "الحالة: " + localStorage.getItem('apex_android_status');
-        }
-        if(localStorage.getItem('apex_android_link')) {
-            document.getElementById('android-btn-link').href = localStorage.getItem('apex_android_link');
-        }
+        // تحديث البيانات فور فتح الصفحة
+        updateUI();
+
+        // التحديث الفوري بدون رفرش (تلقائياً إذا تغيرت من اللوحة)
+        window.addEventListener('storage', function(e) {
+            updateUI();
+        });
     </script>
 </body>
 </html>
