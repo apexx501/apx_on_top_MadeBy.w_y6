@@ -93,7 +93,7 @@
         </div>
         <div class="form-group">
             <label>رابط تحميل PC:</label>
-            <input type="url" id="pc-link" placeholder="رابط التحميل">
+            <input type="url" id="pc-link" placeholder="رابط التحميل للكمبيوتر">
         </div>
 
         <button class="btn-submit" onclick="saveData()">حفظ ونشر التحديثات فوراً للديسكورد والموقع</button>
@@ -117,9 +117,9 @@
 
         function loadSavedData() {
             document.getElementById('ios-status').value = localStorage.getItem('apex_ios_status') || '🟢 يعمل بنجاح';
-            document.getElementById('ios-link').value = localStorage.getItem('apex_ios_link') || '#';
+            document.getElementById('ios-link').value = localStorage.getItem('apex_ios_link') || 'https://www.mediafire.com/file/mbk0ng1zrouuirr/Delta-2.717.982.ipa.download/file';
             document.getElementById('android-status').value = localStorage.getItem('apex_android_status') || '🟢 يعمل بنجاح';
-            document.getElementById('android-link').value = localStorage.getItem('apex_android_link') || '#';
+            document.getElementById('android-link').value = localStorage.getItem('apex_android_link') || 'https://www.mediafire.com/file/ziwjam1gf2or86t/Delta-2.743.1136.apk/file';
             document.getElementById('pc-status').value = localStorage.getItem('apex_pc_status') || '🟢 يعمل بنجاح';
             document.getElementById('pc-link').value = localStorage.getItem('apex_pc_link') || '#';
         }
