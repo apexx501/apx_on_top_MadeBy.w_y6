@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APEX STORE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-yellow: #FFD000;
+            --bg-dark: #070F1E;
+            --card-bg: #112240;
+            --text-light: #F8F9FA;
+            --text-gray: #8892B0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-light); min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; }
+
+        header { background: #0A192F; border-bottom: 2px solid var(--primary-yellow); position: sticky; top: 0; z-index: 100; padding: 12px 20px; }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo-container { display: flex; align-items: center; gap: 12px; }
+        .logo-img { width: 45px; height: 45px; border-radius: 10px; border: 2px solid var(--primary-yellow); object-fit: cover; }
+        .logo-text { font-size: 20px; font-weight: 700; }
+        .logo-text span { color: var(--primary-yellow); }
+
+        .container { max-width: 500px; margin: 0 auto; padding: 20px; width: 100%; }
+        .main-banner { width: 100%; max-width: 460px; height: 230px; margin: 0 auto 25px; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255, 208, 0, 0.2); background: #000; }
+        .main-banner img { width: 100%; height: 100%; object-fit: cover; }
+
+        .section-card { background: var(--card-bg); border: 1px solid rgba(255, 208, 0, 0.2); border-radius: 20px; padding: 22px 20px; margin-bottom: 18px; text-align: center; }
+        .card-icon { width: 60px; height: 60px; background: rgba(255, 208, 0, 0.1); border: 2px solid var(--primary-yellow); color: var(--primary-yellow); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; margin: 0 auto 12px; }
+        .card-title { font-size: 20px; font-weight: 800; }
+        .status-badge { display: inline-block; padding: 4px 12px; background: rgba(255,255,255,0.05); border-radius: 20px; font-size: 13px; font-weight: 700; margin: 8px 0 15px; color: var(--primary-yellow); }
+
+        .btn-action { width: 100%; padding: 13px 20px; background: linear-gradient(135deg, var(--primary-yellow) 0%, #E6B800 100%); color: #000; border-radius: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; }
+        .social-btn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px; border-radius: 12px; text-decoration: none; color: #fff; font-weight: 700; background: #5865F2; }
+
+        footer { text-align: center; padding: 20px; color: var(--text-gray); font-size: 13px; border-top: 1px solid rgba(255, 255, 255, 0.05); background: #050B14; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-content">
+            <div class="logo-container">
+                <img src="https://github.com/arbtsmp/apx_on_top_MadeBy.w_y6/blob/main/APX%20logo.jpeg?raw=true" alt="APEX Logo" class="logo-img">
+                <div class="logo-text">APEX <span>STORE</span></div>
+            </div>
+            <div style="color: var(--primary-yellow); font-size: 20px;"><i class="fa-solid fa-bolt"></i></div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-banner">
+            <img src="https://github.com/arbtsmp/apx_on_top_MadeBy.w_y6/blob/main/APX%20banner.jpeg?raw=true" alt="APEX Banner">
+        </div>
+
+        <!-- DELTA IOS -->
+        <div class="section-card">
+            <div class="card-icon"><i class="fa-brands fa-apple"></i></div>
+            <div class="card-title">DELTA IOS</div>
+            <div id="ios-status-display" class="status-badge">🟢 يعمل بنجاح</div>
+            <a id="ios-btn-link" href="https://www.mediafire.com/file/mbk0ng1zrouuirr/Delta-2.717.982.ipa.download/file" target="_blank" class="btn-action">
+                <i class="fa-solid fa-download"></i> اضغط للتحميل
+            </a>
+        </div>
+
+        <!-- DELTA ANDROID -->
+        <div class="section-card">
+            <div class="card-icon"><i class="fa-brands fa-android"></i></div>
+            <div class="card-title">DELTA ANDROID</div>
+            <div id="android-status-display" class="status-badge">🟢 يعمل بنجاح</div>
+            <a id="android-btn-link" href="https://www.mediafire.com/file/ziwjam1gf2or86t/Delta-2.743.1136.apk/file" target="_blank" class="btn-action">
+                <i class="fa-solid fa-download"></i> اضغط للتحميل
+            </a>
+        </div>
+
+        <!-- Official Store -->
+        <div class="section-card">
+            <div class="card-icon"><i class="fa-solid fa-store"></i></div>
+            <div class="card-title">المتجر الرسمي</div>
+            <a href="https://501apex.rmz.gg/" target="_blank" class="btn-action" style="margin-top: 15px;">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> اضغط للدخول
+            </a>
+        </div>
+
+        <div style="margin-top: 10px;">
+            <a href="https://discord.gg/p5PckyMUjt" target="_blank" class="social-btn">
+                <i class="fa-brands fa-discord"></i> سيرفر الديسكورد
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <div>جميع الحقوق محفوظة © APEX STORE 2026</div>
+    </footer>
+
+    <script>
+        // سحب البيانات المحدثة من التخزين المشترك للموقع
+        if(localStorage.getItem('apex_ios_status')) {
+            document.getElementById('ios-status-display').innerText = "الحالة: " + localStorage.getItem('apex_ios_status');
+        }
+        if(localStorage.getItem('apex_ios_link')) {
+            document.getElementById('ios-btn-link').href = localStorage.getItem('apex_ios_link');
+        }
+
+        if(localStorage.getItem('apex_android_status')) {
+            document.getElementById('android-status-display').innerText = "الحالة: " + localStorage.getItem('apex_android_status');
+        }
+        if(localStorage.getItem('apex_android_link')) {
+            document.getElementById('android-btn-link').href = localStorage.getItem('apex_android_link');
+        }
+    </script>
+</body>
+</html>
