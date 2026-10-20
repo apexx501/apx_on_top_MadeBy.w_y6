@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APEX STORE - Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-yellow: #FFD000;
+            --bg-dark: #070F1E;
+            --card-bg: #112240;
+            --text-light: #F8F9FA;
+            --text-gray: #8892B0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .panel-box {
+            background: var(--card-bg);
+            border: 2px solid var(--primary-yellow);
+            border-radius: 20px;
+            padding: 30px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--primary-yellow);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: var(--text-gray);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 208, 0, 0.3);
+            background: #0A192F;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--primary-yellow);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary-yellow);
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.2s;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+        }
+
+        #login-screen, #dashboard-screen {
+            display: none;
+        }
+
+        #login-screen.active, #dashboard-screen.active {
+            display: block;
+        }
+
+        .status-msg {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شاشة تسجيل الدخول -->
+    <div id="login-screen" class="panel-box active">
+        <h2><i class="fa-solid fa-lock"></i> لوحة التحكم</h2>
+        <div class="form-group">
+            <label>اسم المستخدم:</label>
+            <input type="text" id="username" placeholder="ادخل اليوزر">
+        </div>
+        <div class="form-group">
+            <label>كلمة المرور:</label>
+            <input type="password" id="password" placeholder="ادخل الباسورد">
+        </div>
+        <button class="btn-submit" onclick="login()">دخول اللوحة</button>
+        <div id="login-err" class="status-msg" style="color: #ff4d4d;"></div>
+    </div>
+
+    <!-- لوحة التحكم الرئيسية -->
+    <div id="dashboard-screen" class="panel-box">
+        <h2><i class="fa-solid fa-sliders"></i> إعدادات APEX STORE</h2>
+
+        <div class="form-group">
+            <label>حالة DELTA IOS:</label>
+            <select id="ios-status">
+                <option value="🟢 يعمل بنجاح">🟢 يعمل بنجاح</option>
+                <option value="🔴 متوقف للتحسين والصيانة">🔴 متوقف للصيانة</option>
+                <option value="🟡 تحديث جديد قادم">🟡 تحديث جديد قادم</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>رابط تحميل DELTA IOS:</label>
+            <input type="url" id="ios-link" placeholder="رابط الميديا فاير">
+        </div>
+
+        <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">
+
+        <div class="form-group">
+            <label>حالة DELTA ANDROID:</label>
+            <select id="android-status">
+                <option value="🟢 يعمل بنجاح">🟢 يعمل بنجاح</option>
+                <option value="🔴 متوقف للتحسين والصيانة">🔴 متوقف للصيانة</option>
+                <option value="🟡 تحديث جديد قادم">🟡 تحديث جديد قادم</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>رابط تحميل DELTA ANDROID:</label>
+            <input type="url" id="android-link" placeholder="رابط الميديا فاير">
+        </div>
+
+        <button class="btn-submit" onclick="saveData()">حفظ ونشر التحديثات للديسكورد والموقع</button>
+        <div id="save-msg" class="status-msg"></div>
+    </div>
+
+    <script>
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1562110848657530890/_ubBGkQMS2cB_ExA8qSGvRPJgegD18jR6GQj_VIW9B-PpsShkZK9Lt218yNgb6zebQHn";
+
+        // التحقق من بيانات الدخول
+        function login() {
+            const u = document.getElementById('username').value;
+            const p = document.getElementById('password').value;
+
+            if (u === "Apex18" && p === "Apex17") {
+                document.getElementById('login-screen').classList.remove('active');
+                document.getElementById('dashboard-screen').classList.add('active');
+                loadSavedData();
+            } else {
+                document.getElementById('login-err').innerText = "بيانات الدخول غير صحيحة!";
+            }
+        }
+
+        // تحميل البيانات المحفوظة سابقاً
+        function loadSavedData() {
+            document.getElementById('ios-status').value = localStorage.getItem('apex_ios_status') || '🟢 يعمل بنجاح';
+            document.getElementById('ios-link').value = localStorage.getItem('apex_ios_link') || 'https://www.mediafire.com/file/mbk0ng1zrouuirr/Delta-2.717.982.ipa.download/file';
+            document.getElementById('android-status').value = localStorage.getItem('apex_android_status') || '🟢 يعمل بنجاح';
+            document.getElementById('android-link').value = localStorage.getItem('apex_android_link') || 'https://www.mediafire.com/file/ziwjam1gf2or86t/Delta-2.743.1136.apk/file';
+        }
+
+        // حفظ البيانات وإرسال التحديث للديسكورد
+        async function saveData() {
+            const iosStatus = document.getElementById('ios-status').value;
+            const iosLink = document.getElementById('ios-link').value;
+            const androidStatus = document.getElementById('android-status').value;
+            const androidLink = document.getElementById('android-link').value;
+
+            localStorage.setItem('apex_ios_status', iosStatus);
+            localStorage.setItem('apex_ios_link', iosLink);
+            localStorage.setItem('apex_android_status', androidStatus);
+            localStorage.setItem('apex_android_link', androidLink);
+
+            // إرسال البانل تلقائياً لروم الديسكورد عبر Webhook
+            const embedData = {
+                username: "APEX STORE SYSTEM",
+                avatar_url: "https://github.com/arbtsmp/apx_on_top_MadeBy.w_y6/blob/main/APX%20logo.jpeg?raw=true",
+                embeds: [{
+                    title: "⚡ تحديث حالة الإكسيكيوتير - APEX STORE",
+                    description: "تم تحديث حالة السكريبتات وروابط التحميل بنجاح!",
+                    color: 16764928, // اللون الأصفر
+                    fields: [
+                        { name: "📱 DELTA IOS", value: `**الحالة:** ${iosStatus}\n[اضغط للتحميل](${iosLink})`, inline: false },
+                        { name: "🤖 DELTA ANDROID", value: `**الحالة:** ${androidStatus}\n[اضغط للتحميل](${androidLink})`, inline: false }
+                    ],
+                    footer: { text: "APEX STORE • 2026" },
+                    timestamp: new Date()
+                }]
+            };
+
+            try {
+                await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(embedData)
+                });
+                document.getElementById('save-msg').style.color = "#00ff88";
+                document.getElementById('save-msg').innerText = "تم حفظ التحديثات وإرسال البانل للديسكورد بنجاح! 🚀";
+            } catch (err) {
+                document.getElementById('save-msg').style.color = "#ff4d4d";
+                document.getElementById('save-msg').innerText = "تم الحفظ بالموقع ولكن حدث خطأ في إرسال الديسكورد.";
+            }
+        }
+    </script>
+</body>
+</html>
